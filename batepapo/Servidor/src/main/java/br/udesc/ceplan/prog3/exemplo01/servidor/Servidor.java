@@ -29,6 +29,7 @@ import br.udesc.ceplan.prog3.exemplo01.servidor.threads.MonitorConexao;
 import br.udesc.ceplan.prog3.exemplo01.servidor.threads.MonitorNovaConexao;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
 import org.slf4j.Logger;
 
 /**
@@ -91,13 +92,19 @@ public class Servidor implements NovoClienteOuvinte, ConexaoOuvinte {
             Thread threadMonitorConexao = new Thread(monitorConexaoRunnable);
             this.clientes.put(novoCliente, threadMonitorConexao);
             threadMonitorConexao.start();
+            try {
+                PrintWriter socketOut = new PrintWriter(novoCliente.getOutputStream(), true);
+                socketOut.println("Bem vindo ao servidor!");
+            } catch (IOException ex) {
+                logger.error(ex.getLocalizedMessage());
+            }
         }
     }
 
     @Override
     public void onNovaMensagem(Socket origem, String mensagem) {
-        logger.debug("Mensagem recebida de {}:{}", 
-                            origem.getInetAddress(), origem.getPort());
+        logger.debug("Mensagem recebida de {}:{} ({})", 
+                            origem.getInetAddress(), origem.getPort(), mensagem);
         for (Map.Entry<Socket, Thread> entry : clientes.entrySet()) {
             Socket destino = entry.getKey();
             if (!destino.equals(origem)) {
@@ -105,10 +112,9 @@ public class Servidor implements NovoClienteOuvinte, ConexaoOuvinte {
                     PrintWriter out;
                     out = new PrintWriter(destino.getOutputStream(), true);
                     out.println(mensagem);
-                    logger.debug("Mensagem enviada de {}:{} para {}:{} ({})", 
+                    logger.debug("Mensagem enviada de {}:{} para {}:{}", 
                             origem.getInetAddress(), origem.getPort(), 
-                            destino.getInetAddress(), destino.getPort(), 
-                            mensagem);
+                            destino.getInetAddress(), destino.getPort());
                 } catch (IOException ex) {
                     logger.error(ex.getLocalizedMessage());
                 }

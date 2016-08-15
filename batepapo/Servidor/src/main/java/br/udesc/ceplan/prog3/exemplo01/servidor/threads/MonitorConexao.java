@@ -45,6 +45,8 @@ public class MonitorConexao implements Runnable {
     @Override
     public void run() {
         BufferedReader in = null;
+        logger.info("Cliente {}:{} conectado", 
+                cliente.getInetAddress(), cliente.getPort());
         try {
             InputStreamReader inputStreamReader;
             inputStreamReader = new InputStreamReader(this.cliente.getInputStream());
