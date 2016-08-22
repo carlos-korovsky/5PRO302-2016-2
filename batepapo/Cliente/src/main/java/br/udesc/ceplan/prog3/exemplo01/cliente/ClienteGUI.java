@@ -16,6 +16,7 @@
  */
 package br.udesc.ceplan.prog3.exemplo01.cliente;
 
+import br.udesc.ceplan.prog3.exemplo01.cliente.persistencia.PersistenciaEmArquivo;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -31,8 +32,13 @@ public class ClienteGUI extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("fxml/ClienteGUI.fxml"));
-    
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("fxml/ClienteGUI.fxml"));
+        Parent root = loader.load();
+        
+        ClienteGUIController controller = (ClienteGUIController) loader.getController();
+        
+        controller.setPersistencia(new PersistenciaEmArquivo());
+        
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setTitle("FXML Welcome");
         primaryStage.setScene(scene);

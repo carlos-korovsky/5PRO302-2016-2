@@ -17,7 +17,6 @@
 package br.udesc.ceplan.prog3.exemplo01.cliente;
 
 import br.udesc.ceplan.prog3.exemplo01.cliente.persistencia.Persistencia;
-import br.udesc.ceplan.prog3.exemplo01.cliente.persistencia.PersistenciaEmArquivo;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -59,14 +58,17 @@ public class ClienteGUIController implements Initializable, OnNewMessageListener
     private PrintWriter socketOut;
     private Thread monitorConexao;
     
-    private final Persistencia persistencia;
+    private Persistencia persistencia;
 
     public ClienteGUIController() {
         this.mensagens = FXCollections.observableArrayList();
         this.logger = LoggerFactory.getLogger(getClass());
-        this.persistencia = new PersistenciaEmArquivo();
     }
     
+    
+    public void setPersistencia(Persistencia persistencia){
+        this.persistencia = persistencia;
+    }
     /**
      * Initializes the controller class.
      */
@@ -91,6 +93,9 @@ public class ClienteGUIController implements Initializable, OnNewMessageListener
     private void onBtConectarClick(ActionEvent event) {
         if (this.socket == null) {
             try {
+                if (this.persistencia == null) {
+                    throw new IOException("Persistencia não definida!");
+                }
                 this.socket = new Socket("127.0.0.1", 3377);
                 socketOut = new PrintWriter(socket.getOutputStream(), true);
                 MonitorConexao monitorConexaoRunnable = new MonitorConexao(this.socket, this);
