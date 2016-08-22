@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
+import javafx.collections.ObservableList;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -31,10 +32,16 @@ public class MonitorConexao implements Runnable {
     private final org.slf4j.Logger logger;
     private final Socket conexao;
     private BufferedReader socketIn;
+    private OnNewMessageListener<String> mensagens;
     
     public MonitorConexao(Socket conexao) {
+        this(conexao, null);
+    }
+    
+    public MonitorConexao(Socket conexao, OnNewMessageListener<String> mensagens) {
         this.logger = LoggerFactory.getLogger(getClass());
         this.conexao = conexao;
+        this.mensagens = mensagens;
     }
     
     @Override
@@ -46,10 +53,17 @@ public class MonitorConexao implements Runnable {
             while (this.conexao.isConnected() && !this.conexao.isClosed()) {
                 message = socketIn.readLine();
                 logger.info("Mensagem recebida: {}", message);
+                this.addMensagem(message);
+
             }
         } catch (IOException ex) {
             logger.error(ex.getLocalizedMessage());
         }
     }
     
+    private synchronized void addMensagem(String mensagem) {
+        if (this.mensagens != null) {
+            this.mensagens.OnNewMessage(mensagem);
+        }
+    }
 }
