@@ -15,9 +15,12 @@ import java.util.List;
  */
 public class PizzaQueijo extends Pizza {
 
+    public PizzaQueijo() {
+        super("Pizza de queijo");
+    }
+
     @Override
-    protected void definir() {
-        this.setNome("Pizza de queijo");
+    public void separarIngredientes() {
         this.setMassa("grossa");
         this.setMolho("molho de tomate");
         List<String> coberturas = new ArrayList<>();

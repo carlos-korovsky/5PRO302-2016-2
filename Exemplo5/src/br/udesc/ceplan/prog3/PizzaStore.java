@@ -15,6 +15,7 @@ public abstract class PizzaStore {
         System.out.println("Pedindo pizza sabor: " + sabor);
         Pizza pizza = this.createPizza(sabor);
         if (pizza != null) {
+            pizza.separarIngredientes();
             pizza.preparar();
             pizza.cozinhar();
             pizza.cortar();

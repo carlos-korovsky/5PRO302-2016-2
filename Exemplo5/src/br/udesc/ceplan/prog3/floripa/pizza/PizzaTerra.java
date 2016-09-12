@@ -15,9 +15,12 @@ import java.util.List;
  */
 public class PizzaTerra extends Pizza {
 
+    public PizzaTerra() {
+        super("Pizza Terra");
+    }
+
     @Override
-    protected void definir() {
-        this.setNome("Pizza Terra");
+    public void separarIngredientes() {
         this.setMassa("fina");
         this.setMolho("molho de tomate");
         List<String> coberturas = new ArrayList<>();

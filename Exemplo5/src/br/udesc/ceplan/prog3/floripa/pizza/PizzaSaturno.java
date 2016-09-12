@@ -14,10 +14,13 @@ import java.util.List;
  * @author Carlos Alberto Cipriano Korovsky <carlos.korovsky at gmail.com>
  */
 public class PizzaSaturno extends Pizza {
+
+    public PizzaSaturno() {
+        super("Pizza Saturno");
+    }
     
     @Override
-    protected void definir() {
-        this.setNome("Pizza Saturno");
+    public void separarIngredientes() {
         this.setMassa("fina");
         this.setMolho("creme de leite");
         List<String> coberturas = new ArrayList<>();

@@ -18,11 +18,11 @@ public abstract class Pizza {
     private String molho;
     private List<String> coberturas;
 
-    public Pizza() {
-        this.definir();
+    public Pizza(String nome) {
+        this.nome = nome;
     }
     
-    protected abstract void definir();
+    public abstract void separarIngredientes();
     
     public void preparar() {
         System.out.println("Preparando pizza " + nome);
@@ -49,10 +49,6 @@ public abstract class Pizza {
 
     public void entregar() {
         System.out.println("Engregando pizza: " + nome);
-    }
-    
-    public void setNome(String nome) {
-        this.nome = nome;
     }
 
     public void setMassa(String massa) {
