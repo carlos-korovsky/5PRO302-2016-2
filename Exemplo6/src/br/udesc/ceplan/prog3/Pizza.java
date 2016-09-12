@@ -23,18 +23,18 @@ public abstract class Pizza {
     
     private final FabricaIngredientes ingredientes;
 
-    public Pizza(FabricaIngredientes ingredientes) {
+    public Pizza(FabricaIngredientes ingredientes, String nome) {
         this.ingredientes = ingredientes;
+        this.nome = nome;
     }
         
     protected FabricaIngredientes getIngredientes() {
         return this.ingredientes;
     }
     
-    protected abstract void separarIngredientes();
+    public abstract void separarIngredientes();
     
     public void preparar()  {
-        this.separarIngredientes();
         System.out.println("Preparando pizza " + nome);
         System.out.println("   Preparando massa: " + massa.getMassa());
         System.out.println("   Adicionando molho: " + molho.getMolho());
@@ -63,10 +63,6 @@ public abstract class Pizza {
 
     public final String getNome() {
         return nome;
-    }
-
-    public final void setNome(String nome) {
-        this.nome = nome;
     }
 
     public Massa getMassa() {

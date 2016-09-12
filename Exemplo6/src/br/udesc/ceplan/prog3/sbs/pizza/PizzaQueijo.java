@@ -17,12 +17,11 @@ import java.util.List;
 public class PizzaQueijo extends Pizza {
 
     public PizzaQueijo(FabricaIngredientes ingredientes) {
-        super(ingredientes);
-        this.setNome("Pizza de queijo");
+        super(ingredientes, "Pizza de queijo");
     }
 
     @Override
-    protected void separarIngredientes() {
+    public void separarIngredientes() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

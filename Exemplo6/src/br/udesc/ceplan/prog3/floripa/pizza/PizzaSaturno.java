@@ -18,12 +18,11 @@ import java.util.List;
 public class PizzaSaturno extends Pizza {
 
     public PizzaSaturno(FabricaIngredientes ingredientes) {
-        super(ingredientes);
-        this.setNome("Pizza Saturno");
+        super(ingredientes, "Pizza Saturno");
     }
 
     @Override
-    protected void separarIngredientes() {
+    public void separarIngredientes() {
         FabricaIngredientes ingredientes = this.getIngredientes();
         this.setMassa(ingredientes.criarMassa());
         this.setMolho(ingredientes.criarMolho());
