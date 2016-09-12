@@ -21,12 +21,12 @@ public class Exemplo6 {
         Pizza pizza;
         PizzaStore sbsPizzaStore = new SBSPizzaStore();
         PizzaStore floripaPizzaStore = new FloripaPizzaStore();
-        
-        pizza = sbsPizzaStore.orderPizza("queijo");       
+            
         pizza = floripaPizzaStore.orderPizza("queijo");
+        pizza = sbsPizzaStore.orderPizza("queijo");  
         
-        pizza = sbsPizzaStore.orderPizza("palmito");
         pizza = floripaPizzaStore.orderPizza("palmito");
+        pizza = sbsPizzaStore.orderPizza("palmito");
     }
     
 }
