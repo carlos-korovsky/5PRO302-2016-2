@@ -9,6 +9,10 @@ import br.udesc.ceplan.prog3.FabricaIngredientes;
 import br.udesc.ceplan.prog3.ingredientes.Cobertura;
 import br.udesc.ceplan.prog3.ingredientes.Massa;
 import br.udesc.ceplan.prog3.ingredientes.Molho;
+import br.udesc.ceplan.prog3.sbs.ingredientes.SBSCoberturaMussarela;
+import br.udesc.ceplan.prog3.sbs.ingredientes.SBSCoberturaPalmito;
+import br.udesc.ceplan.prog3.sbs.ingredientes.SBSMassa;
+import br.udesc.ceplan.prog3.sbs.ingredientes.SBSMolho;
 
 /**
  *
@@ -18,17 +22,23 @@ public class SBSFabricaIngredientes implements FabricaIngredientes {
 
     @Override
     public Massa criarMassa() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new SBSMassa();
     }
 
     @Override
     public Molho criarMolho() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new SBSMolho();
     }
 
     @Override
     public Cobertura criarCobertura(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Cobertura cobertura = null;
+        if (nome.equalsIgnoreCase("palmito")) {
+            cobertura = new SBSCoberturaPalmito();
+        } else if (nome.equalsIgnoreCase("mussarela")) {
+            cobertura = new SBSCoberturaMussarela();
+        }
+        return cobertura;
     }
     
 }

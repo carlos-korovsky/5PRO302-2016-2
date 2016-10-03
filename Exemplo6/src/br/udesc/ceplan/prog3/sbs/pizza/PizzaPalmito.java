@@ -7,6 +7,7 @@ package br.udesc.ceplan.prog3.sbs.pizza;
 
 import br.udesc.ceplan.prog3.FabricaIngredientes;
 import br.udesc.ceplan.prog3.Pizza;
+import br.udesc.ceplan.prog3.ingredientes.Cobertura;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,13 @@ public class PizzaPalmito extends Pizza {
 
     @Override
     public void separarIngredientes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        FabricaIngredientes ingredientes = this.getIngredientes();
+        this.setMassa(ingredientes.criarMassa());
+        this.setMolho(ingredientes.criarMolho());
+        List<Cobertura> coberturas = new ArrayList<>();
+        coberturas.add(ingredientes.criarCobertura("palmito"));
+        coberturas.add(ingredientes.criarCobertura("mussarela"));
+        this.setCoberturas(coberturas);
     }
     
     

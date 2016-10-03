@@ -5,6 +5,7 @@
  */
 package br.udesc.ceplan.prog3;
 
+import br.udesc.ceplan.prog3.campoalegre.CampoAlegrePizzaStore;
 import br.udesc.ceplan.prog3.floripa.FloripaPizzaStore;
 import br.udesc.ceplan.prog3.sbs.SBSPizzaStore;
 
@@ -21,12 +22,14 @@ public class Exemplo5 {
         Pizza pizza;
         PizzaStore sbsPizzaStore = new SBSPizzaStore();
         PizzaStore floripaPizzaStore = new FloripaPizzaStore();
+        PizzaStore campoAlegrePizzaStore = new CampoAlegrePizzaStore();
         
         pizza = sbsPizzaStore.orderPizza("queijo");       
         pizza = floripaPizzaStore.orderPizza("queijo");
         
         pizza = sbsPizzaStore.orderPizza("palmito");
         pizza = floripaPizzaStore.orderPizza("palmito");
+        pizza = campoAlegrePizzaStore.orderPizza("palmito");
     }
     
 }
