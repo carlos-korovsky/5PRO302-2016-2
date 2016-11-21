@@ -19,6 +19,7 @@ package br.udesc.ceplan.prog3.exemplo07.dao;
 import br.udesc.ceplan.prog3.exemplo07.config.Configuration;
 import br.udesc.ceplan.prog3.exemplo07.config.DatabaseType;
 import br.udesc.ceplan.prog3.exemplo07.dao.hsqldb.HsqldbDaoFactory;
+import br.udesc.ceplan.prog3.exemplo07.dao.mysql.MysqlDaoFactory;
 import java.sql.SQLException;
 
 /**
@@ -39,7 +40,7 @@ public abstract class DaoFactory {
             if (dataBaseType == DatabaseType.DATABASE_HSQLDB) {
                 DaoFactory.instance = new HsqldbDaoFactory("jdbc:hsqldb:mem:aname", "sa", "");
             } else if (dataBaseType == DatabaseType.DATABASE_MYSQL) {
-                DaoFactory.instance = null;
+                DaoFactory.instance = new MysqlDaoFactory("jdbc:mysql:..", "root", "");
             } else {
                 DaoFactory.instance = null;
             }
