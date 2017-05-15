@@ -25,8 +25,8 @@ public class Exemplo9 {
         // Carrega as configurações de conexão ao banco de dados
         Properties configFile = new Properties();
         configFile.setProperty("database", "HSQL");
-        configFile.setProperty("host", "");
-        configFile.setProperty("port", "");
+        //configFile.setProperty("host", "localhost");
+        //configFile.setProperty("port", "3306");
         configFile.setProperty("name", "testedb");
         configFile.setProperty("user", "SA");
         configFile.setProperty("password", "");
@@ -51,7 +51,18 @@ public class Exemplo9 {
         newClient = clientDao.save(newClient);       
         System.out.println(newClient);
 
+        if (clientDao.exists(newClient.getId())) {
+            Client foundClient = clientDao.findOne(newClient.getId());
+            System.out.println("Found client: ");
+            System.out.println(foundClient);
+        }
+        
+        for (Client aux: clientDao.findByName("Client")) {
+            System.out.println(aux);
+        }
 
+        clientDao.deleteAll();
+        
         CompanyDao companyDao = dao.getCompanyDao();
         Company newCompany;
         newCompany = new Company();
@@ -65,6 +76,19 @@ public class Exemplo9 {
         newCompany.setCnpj("7890132345");
         newCompany = companyDao.save(newCompany);
         System.out.println(newCompany);
+        
+        if (companyDao.exists(newCompany.getId())) {
+            Company foundCompany = companyDao.findOne(newCompany.getId());
+            System.out.println("Found company: ");
+            System.out.println(foundCompany);
+        }
+        
+        for (Company aux: companyDao.findByName("Empresa")) {
+            System.out.println(aux);
+        }
+
+        companyDao.deleteAll();
+        
         
     }
     
