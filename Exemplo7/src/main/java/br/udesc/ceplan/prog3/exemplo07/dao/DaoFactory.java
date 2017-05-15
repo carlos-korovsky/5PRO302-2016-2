@@ -21,6 +21,8 @@ import br.udesc.ceplan.prog3.exemplo07.config.DatabaseType;
 import br.udesc.ceplan.prog3.exemplo07.dao.hsqldb.HsqldbDaoFactory;
 import br.udesc.ceplan.prog3.exemplo07.dao.mysql.MysqlDaoFactory;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -28,6 +30,7 @@ import java.sql.SQLException;
  */
 public abstract class DaoFactory {
     
+    private static final Logger logger = LoggerFactory.getLogger(DaoFactory.class);
     private static DaoFactory instance;
     
     protected DaoFactory() {
